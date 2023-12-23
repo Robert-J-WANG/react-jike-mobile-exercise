@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchChannels } from "@/apis/channelAPI";
+import { useNavigate } from "react-router-dom";
 
 export const useChannel = () => {
   const [channels, setChannels] = useState<ChannelItem[]>([]);
@@ -15,5 +16,12 @@ export const useChannel = () => {
     };
     getChannels();
   }, []);
-  return { channels };
+
+  //  跳转路由的回调
+  const navigate = useNavigate();
+  const goToArticleLists = (id: string) => {
+    navigate(`/articles?id=${id}`);
+  };
+
+  return { channels, goToArticleLists };
 };
