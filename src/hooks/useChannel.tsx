@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { fetchChannels } from "@/apis/channelAPI";
-import { useNavigate } from "react-router-dom";
 
 export const useChannel = () => {
   const [channels, setChannels] = useState<ChannelItem[]>([]);
