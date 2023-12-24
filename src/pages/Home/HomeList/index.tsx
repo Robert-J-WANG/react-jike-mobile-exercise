@@ -1,8 +1,8 @@
-import { List, Image } from "antd-mobile";
+import { List, Image, InfiniteScroll } from "antd-mobile";
 
 // mock数据
 // import { users } from "./user";
-import { useArticleList } from "@/hooks/useArticleList";
+import { useArticle } from "@/hooks/useArticle";
 
 type ParamsType = {
   articleID: string;
@@ -10,9 +10,10 @@ type ParamsType = {
 
 export const HomeList = (params: ParamsType) => {
   const { articleID } = params;
-  const { articleLists } = useArticleList(articleID);
+  const { articleLists, goToArticleDetail, loadMore, hasMore } =
+    useArticle(articleID);
   return (
-    <div>
+    <div className="listContainer">
       <List header="文章列表">
         {articleLists.results.map((item) => (
           <List.Item
@@ -27,11 +28,14 @@ export const HomeList = (params: ParamsType) => {
               />
             }
             description={item.pubdate}
+            onClick={() => goToArticleDetail(item.art_id)}
           >
             {item.title}
           </List.Item>
         ))}
       </List>
+      {/* 无限滚动加载控件 */}
+      <InfiniteScroll loadMore={loadMore} hasMore={hasMore} />
     </div>
   );
 };

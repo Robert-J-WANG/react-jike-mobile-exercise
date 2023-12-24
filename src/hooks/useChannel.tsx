@@ -17,11 +17,5 @@ export const useChannel = () => {
     getChannels();
   }, []);
 
-  //  跳转路由的回调
-  const navigate = useNavigate();
-  const goToArticleLists = (id: string) => {
-    navigate(`/articles?id=${id}`);
-  };
-
-  return { channels, goToArticleLists };
+  return { channels };
 };
